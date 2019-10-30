@@ -54,7 +54,17 @@ var F7WelcomescreenPlugin = {
         loop: options.loop,
         pagination: options.pagination ? { el: '.swiper-pagination' } : undefined,
         parallax: options.parallax, 
-        speed: options.parallaxSpeed
+        speed: options.parallaxSpeed,
+        on: {
+          slideChange: function() {
+            if (options.slideChange) {
+              var lastIndex = swiper.slides.length - 1;
+              var isLast = swiper.activeIndex === lastIndex;
+              
+              options.slideChange(isLast);
+            }
+          }
+        }
       });
     }
     
